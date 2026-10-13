@@ -84,7 +84,7 @@ export default function AboutPage() {
                     <p className="team__role">{m.role}</p>
                   </div>
                 </div>
-                <p className="team__edu"><Icon name="book" size={16} /> {m.education}</p>
+                <p className="team__edu"><Icon name="book" size={14} /> {m.education}</p>
                 <p className="team__bio">{m.bio}</p>
                 <ul className="team__tags">
                   {m.tags.map((t) => (<li key={t}>{t}</li>))}
