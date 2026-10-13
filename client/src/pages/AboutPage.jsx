@@ -71,9 +71,9 @@ export default function AboutPage() {
 
       <WhyChoose items={WHY} />
 
-      <section id="team" className="section section--grey">
+      <section id="team" className="section section--ink">
         <div className="container">
-          <SectionHeading title="Backbone Team" intro="The people behind Industrial Solutions." />
+          <SectionHeading light title="Backbone Team" intro="The people behind Industrial Solutions." />
           <RevealGrid className="grid grid--3 team">
             {TEAM.map((m) => (
               <article key={m.id} className="team__card">
