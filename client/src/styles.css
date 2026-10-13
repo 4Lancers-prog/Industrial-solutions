@@ -175,18 +175,22 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .industry .icon { color: var(--blue); }
 .industry h3 { margin: 6px 0 0; font-size: 1rem; }
 
-/* Team ("Backbone Team") */
-.team__card { display: flex; flex-direction: column; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: transform .3s, box-shadow .3s, border-color .3s; }
-.team__card:hover { transform: translateY(-5px); border-color: var(--teal); box-shadow: 0 16px 36px rgba(11,31,51,.12); }
-.team__head { display: flex; align-items: center; gap: 14px; }
-.team__avatar { flex: 0 0 auto; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: #06222A; background: linear-gradient(135deg, var(--teal), var(--blue)); letter-spacing: .5px; }
-.team__name { margin: 0; font-size: 1.1rem; }
-.team__role { margin: 2px 0 0; color: var(--teal); font-weight: 600; font-size: .9rem; }
-.team__edu { display: flex; align-items: center; gap: 6px; margin: 0; color: var(--muted); font-size: .85rem; }
-.team__edu .icon { color: var(--blue); flex: 0 0 auto; }
-.team__bio { margin: 0; color: var(--muted); font-size: .95rem; }
-.team__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: auto 0 0; padding: 4px 0 0; }
-.team__tags li { font-size: .78rem; font-weight: 600; color: var(--text); background: var(--grey); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+/* Team ("Backbone Team") — dark premium cards */
+.team__card { position: relative; display: flex; flex-direction: column; gap: 15px; padding: 30px 26px 28px; background: linear-gradient(180deg, #0e1a33 0%, #0a1224 100%); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; transition: transform .35s, border-color .35s, box-shadow .35s; }
+.team__card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--blue)); }
+.team__card::after { content: ''; position: absolute; top: -40%; right: -30%; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(22,184,166,.18), transparent 70%); pointer-events: none; opacity: 0; transition: opacity .35s; }
+.team__card:hover { transform: translateY(-7px); border-color: rgba(22,184,166,.5); box-shadow: 0 24px 54px rgba(21,94,239,.24); }
+.team__card:hover::after { opacity: 1; }
+.team__head { display: flex; align-items: center; gap: 16px; position: relative; }
+.team__avatar { flex: 0 0 auto; display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; font: 700 1.2rem/1 var(--font-head); color: #06222A; background: linear-gradient(135deg, var(--teal), var(--blue)); box-shadow: 0 0 0 4px rgba(22,184,166,.14), 0 10px 22px rgba(21,94,239,.35); letter-spacing: .5px; }
+.team__name { margin: 0; color: #fff; font-size: 1.14rem; }
+.team__role { margin: 4px 0 0; color: var(--teal); font-weight: 600; font-size: .88rem; }
+.team__edu { display: flex; align-items: flex-start; gap: 8px; margin: 0; color: #9dacc3; font-size: .85rem; line-height: 1.5; position: relative; }
+.team__edu .icon { color: var(--teal); flex: 0 0 auto; margin-top: 2px; }
+.team__bio { margin: 0; color: #9dacc3; font-size: .95rem; line-height: 1.68; position: relative; }
+.team__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: auto 0 0; padding: 8px 0 0; position: relative; }
+.team__tags li { font-size: .76rem; font-weight: 600; color: #dbe6f5; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 6px 12px; transition: background .25s, border-color .25s; }
+.team__card:hover .team__tags li { border-color: rgba(22,184,166,.35); }
 
 /* Product cards */
 .product-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: box-shadow .25s, transform .25s; }
