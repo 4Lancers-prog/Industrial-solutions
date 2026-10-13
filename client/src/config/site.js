@@ -9,7 +9,11 @@ export const SITE = {
   email: 'industrialsolutions2015@gmail.com',
   // Configurable map link (opens a Google Maps search for the address)
   mapUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('52/1, Shiddan Peth, Hubli, Karnataka 580020'),
-  apiBase: import.meta.env.VITE_API_URL || '',
+  // API root. Empty VITE_API_URL => same-origin "/api": works in development
+  // (Vite proxies /api to the Express server) and in production when /api is
+  // routed to the backend on the same domain. For a separate API host, set
+  // VITE_API_URL to its full API root, e.g. https://api.industrialsolutions.com/api
+  apiBase: import.meta.env.VITE_API_URL || '/api',
 };
 
 export const DEFAULT_WA_MESSAGE =

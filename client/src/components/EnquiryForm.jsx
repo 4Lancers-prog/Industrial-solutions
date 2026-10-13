@@ -68,7 +68,7 @@ export default function EnquiryForm() {
     setStatus('sending');
     setServerMsg('');
     try {
-      const res = await fetch(`${SITE.apiBase}/api/enquiries`, {
+      const res = await fetch(`${SITE.apiBase}/enquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),

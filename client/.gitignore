@@ -1,4 +1,12 @@
 node_modules
-.env
 dist
 build
+
+# Environment files — never commit real secrets. Keep .env.example.
+.env
+.env.*
+!.env.example
+
+# Cloudflare / Wrangler
+.wrangler
+.dev.vars

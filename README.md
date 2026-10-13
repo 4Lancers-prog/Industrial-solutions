@@ -24,11 +24,29 @@ curl -H "x-admin-token: YOUR_ADMIN_TOKEN" http://localhost:5000/api/enquiries
 ```
 
 ## Production
+
+Full, step-by-step deployment (Cloudflare + Node host + MongoDB Atlas) is in
+**[DEPLOYMENT.md](./DEPLOYMENT.md)**. Two supported shapes:
+
+**A. Cloudflare Worker (recommended) — frontend on Cloudflare's edge, Express on a Node host, same origin.**
+```bash
+cd client
+npx wrangler secret put API_ORIGIN   # your deployed Express origin
+npm run deploy                        # vite build && wrangler deploy
+```
+The Worker (`client/worker/index.js`) serves the built site and proxies `/api/*`
+to Express, so the browser stays on one origin and there is no CORS.
+
+**B. Single Node server — Express serves the API and the built site together.**
 ```bash
 npm run build     # builds client/dist
-npm start         # Express serves the API and the built site on one port
+npm start         # Express serves client/dist + /api on one port
 ```
-Set `CLIENT_ORIGIN` (server) and `VITE_SITE_URL` (client) to the real domain.
+
+In both cases the frontend calls the API same-origin (`VITE_API_URL` empty →
+`/api`). Keep `MONGODB_URI` and `ADMIN_TOKEN` on the backend only — never as
+`VITE_` variables. Set `CLIENT_ORIGIN` (server) and `VITE_SITE_URL` (client) to
+the real domain.
 
 ## What the client edits
 | Change | File |

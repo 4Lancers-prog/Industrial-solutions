@@ -1,8 +1,27 @@
 {
+  // Cloudflare Worker that serves the built React site AND proxies /api/* to
+  // the Express backend, so the whole app lives on one origin.
   "name": "industrial-solutions",
   "compatibility_date": "2026-10-01",
+
+  // The Worker entry point (see worker/index.js). Wrangler bundles it itself;
+  // it is NOT part of the Vite build.
+  "main": "worker/index.js",
+
   "assets": {
+    // Output of `npm run build`. Deploy the BUILT site, never the source.
     "directory": "./dist",
+    // Lets the Worker serve assets via env.ASSETS.fetch(request).
+    "binding": "ASSETS",
+    // Client-side routes (/, /about, ...) fall back to index.html.
+    // Real files (e.g. /assets/*.js, /favicon.svg) are served directly with
+    // their correct MIME type and are NOT replaced by index.html.
     "not_found_handling": "single-page-application"
+  },
+
+  // Backend origin the Worker forwards /api/* to. Replace with your deployed
+  // Express host. For production prefer a Secret:  npx wrangler secret put API_ORIGIN
+  "vars": {
+    "API_ORIGIN": "https://REPLACE-with-your-backend-host.example.com"
   }
 }
