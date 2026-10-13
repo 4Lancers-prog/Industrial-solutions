@@ -1,57 +1,78 @@
 /**
- * Cloudflare Worker for industrialsolutions.com
+ * Cloudflare Worker for the Industrial Solutions site.
  *
- * Responsibilities:
- *  1. Serve the built React site (client/dist) as static assets, including the
- *     SPA fallback for client-side routes such as /about.
- *  2. Reverse-proxy every /api/* request to the Express backend (hosted on a
- *     Node platform such as Render/Railway/Fly). This keeps the browser on a
- *     single origin (https://industrialsolutions.com) so there is NO CORS and
- *     the frontend can simply call "/api/...".
+ *  1. Serves the built React site (client/dist) as static assets, with SPA
+ *     fallback for client-side routes such as /about.
+ *  2. Handles the enquiry API same-origin (no CORS in the browser):
+ *       - POST /api/enquiries -> forwarded to a Google Apps Script Web App
+ *         that appends a row to a Google Sheet (set env.SHEET_WEBHOOK_URL).
+ *       - If SHEET_WEBHOOK_URL is not set, falls back to proxying /api/* to an
+ *         Express backend at env.API_ORIGIN (for the MongoDB option).
+ *       - GET /api/health -> simple status.
  *
- * The Express/Mongoose backend is unchanged — this Worker only forwards to it.
- *
- * Config:
- *  - env.ASSETS      : binding to the static assets in ./dist (see wrangler.jsonc)
- *  - env.API_ORIGIN  : backend origin, e.g. https://industrial-solutions-api.onrender.com
- *                      Set it with:  npx wrangler secret put API_ORIGIN
- *                      (or as a plain var in wrangler.jsonc / the dashboard).
+ * Variables (set in the dashboard or wrangler.jsonc):
+ *   SHEET_WEBHOOK_URL  (optional)  the Apps Script /exec URL
+ *   API_ORIGIN         (optional)  an Express backend origin
  */
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const method = request.method.toUpperCase();
 
-    // --- API traffic -> Express backend ---------------------------------
-    if (url.pathname === '/api' || url.pathname.startsWith('/api/')) {
-      const origin = env.API_ORIGIN;
-      if (!origin) {
-        return new Response(
-          JSON.stringify({ ok: false, message: 'API_ORIGIN is not configured on the Worker.' }),
-          { status: 502, headers: { 'content-type': 'application/json' } }
-        );
+    // Health check.
+    if (url.pathname === '/api/health') {
+      return json({ ok: true, store: env.SHEET_WEBHOOK_URL ? 'sheet' : (env.API_ORIGIN ? 'api' : 'none') });
+    }
+
+    // Enquiry -> Google Sheet (via Apps Script), server-to-server.
+    if (url.pathname === '/api/enquiries' && method === 'POST' && env.SHEET_WEBHOOK_URL) {
+      const body = await request.text();
+      try {
+        const upstream = await fetch(env.SHEET_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+          redirect: 'follow', // Apps Script 302-redirects to its content host
+        });
+        const text = await upstream.text();
+        // Pass the Apps Script JSON straight back to the browser.
+        return new Response(text, {
+          status: upstream.ok ? 200 : 502,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      } catch (err) {
+        return json({ ok: false, message: 'Could not save your enquiry right now. Please try WhatsApp.' }, 502);
       }
+    }
 
-      // Keep the full path (/api/...) and query string; swap only the origin.
-      const target = new URL(origin);
+    // Fallback: proxy any /api/* to an Express backend if one is configured.
+    if ((url.pathname === '/api' || url.pathname.startsWith('/api/')) && env.API_ORIGIN) {
+      const target = new URL(env.API_ORIGIN);
       target.pathname = url.pathname;
       target.search = url.search;
-
-      // Forward headers, adding the real visitor IP so express-rate-limit and
-      // logging on the backend see the client rather than the proxy.
       const headers = new Headers(request.headers);
       const clientIp = request.headers.get('CF-Connecting-IP');
       if (clientIp) headers.set('X-Forwarded-For', clientIp);
       headers.set('X-Forwarded-Proto', 'https');
       headers.set('X-Forwarded-Host', url.host);
-
-      const method = request.method.toUpperCase();
       const hasBody = method !== 'GET' && method !== 'HEAD';
-      const body = hasBody ? await request.arrayBuffer() : undefined;
-
-      return fetch(target.toString(), { method, headers, body, redirect: 'manual' });
+      const reqBody = hasBody ? await request.arrayBuffer() : undefined;
+      return fetch(target.toString(), { method, headers, body: reqBody, redirect: 'manual' });
     }
 
-    // --- Everything else -> static frontend (with SPA fallback) ----------
+    // No backend configured for an API call.
+    if (url.pathname === '/api' || url.pathname.startsWith('/api/')) {
+      return json({ ok: false, message: 'Enquiry service is not configured.' }, 503);
+    }
+
+    // Everything else -> static frontend (with SPA fallback).
     return env.ASSETS.fetch(request);
   },
 };
+
+function json(obj, status = 200) {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
