@@ -339,7 +339,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
   .reveal-stagger:not(.is-visible) > * { opacity: 1; }
-  .marquee__track, .hero__grid, .orb, }
+  .marquee__track, .hero__grid, .orb { animation: none !important; }
+}
 
 /* Horizontal layout for the picture grids: 3 across, then swipe sideways on small screens */
 .grid--rail, .gallery--rail { grid-template-columns: repeat(3, 1fr); }
