@@ -175,6 +175,19 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .industry .icon { color: var(--blue); }
 .industry h3 { margin: 6px 0 0; font-size: 1rem; }
 
+/* Team ("Backbone Team") */
+.team__card { display: flex; flex-direction: column; gap: 14px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: transform .3s, box-shadow .3s, border-color .3s; }
+.team__card:hover { transform: translateY(-5px); border-color: var(--teal); box-shadow: 0 16px 36px rgba(11,31,51,.12); }
+.team__head { display: flex; align-items: center; gap: 14px; }
+.team__avatar { flex: 0 0 auto; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: #06222A; background: linear-gradient(135deg, var(--teal), var(--blue)); letter-spacing: .5px; }
+.team__name { margin: 0; font-size: 1.1rem; }
+.team__role { margin: 2px 0 0; color: var(--teal); font-weight: 600; font-size: .9rem; }
+.team__edu { display: flex; align-items: center; gap: 6px; margin: 0; color: var(--muted); font-size: .85rem; }
+.team__edu .icon { color: var(--blue); flex: 0 0 auto; }
+.team__bio { margin: 0; color: var(--muted); font-size: .95rem; }
+.team__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: auto 0 0; padding: 4px 0 0; }
+.team__tags li { font-size: .78rem; font-weight: 600; color: var(--text); background: var(--grey); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+
 /* Product cards */
 .product-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow); transition: box-shadow .25s, transform .25s; }
 .product-card:hover { box-shadow: 0 14px 34px rgba(11,31,51,.14); transform: translateY(-3px); }

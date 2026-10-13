@@ -10,7 +10,7 @@ import CTABand from '../components/CTABand.jsx';
 import Icon from '../components/Icon.jsx';
 import useReveal from '../hooks/useReveal.js';
 import { SITE, whatsappLink } from '../config/site.js';
-import { SERVICES, WHY, INDUSTRIES } from '../data/services.js';
+import { SERVICES, WHY, INDUSTRIES, TEAM } from '../data/services.js';
 import { CATEGORIES } from '../data/products.js';
 
 export default function AboutPage() {
@@ -70,6 +70,30 @@ export default function AboutPage() {
       </section>
 
       <WhyChoose items={WHY} />
+
+      <section id="team" className="section section--grey">
+        <div className="container">
+          <SectionHeading title="Backbone Team" intro="The people behind Industrial Solutions." />
+          <RevealGrid className="grid grid--3 team">
+            {TEAM.map((m) => (
+              <article key={m.id} className="team__card">
+                <div className="team__head">
+                  <span className="team__avatar" aria-hidden="true">{m.initials}</span>
+                  <div>
+                    <h3 className="team__name">{m.name}</h3>
+                    <p className="team__role">{m.role}</p>
+                  </div>
+                </div>
+                <p className="team__edu"><Icon name="book" size={16} /> {m.education}</p>
+                <p className="team__bio">{m.bio}</p>
+                <ul className="team__tags">
+                  {m.tags.map((t) => (<li key={t}>{t}</li>))}
+                </ul>
+              </article>
+            ))}
+          </RevealGrid>
+        </div>
+      </section>
 
       <section id="industries" className="section">
         <div className="container">

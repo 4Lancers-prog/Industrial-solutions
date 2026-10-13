@@ -55,3 +55,33 @@ export const INDUSTRIES = [
   { icon: 'user', title: 'Polytechnic and Vocational Institutions', text: 'ITI trade labs including electrician and fitter setups.' },
   { icon: 'clipboard', title: 'Industrial Maintenance and Engineering', text: 'Equipment and support for maintenance teams.' },
 ];
+
+export const TEAM = [
+  {
+    id: 'prasad',
+    name: 'Prasad Malagavi',
+    role: 'Sales & Business Development (B2B / B2G)',
+    education: 'B.E., Mechanical Engineering',
+    initials: 'PM',
+    bio: 'Specialises in pelleting and grinding systems for the Animal Feed, Biomass, Oilseed and Alternative Fuel industries. He manages the complete B2B and B2G sales cycle — from generating leads to leading sales teams and handling after-sales service. A Mechanical Engineering graduate, he draws on his technical background to solve business and equipment challenges for commercial and government clients, driven by delivering machinery and technology that help industries build a cleaner, greener future.',
+    tags: ['B2B & B2G Sales', 'Pelleting & Grinding Systems', 'After-Sales Service'],
+  },
+  {
+    id: 'praful',
+    name: 'Praful Malagavi',
+    role: 'Mechanical Design Engineer',
+    education: 'M.S., Machine and Equipment Design',
+    initials: 'PM',
+    bio: 'Mechanical Design Engineer with over four years of international experience in product development, machinery design and manufacturing. His core expertise is in 3D CAD modelling, structural analysis and cross-functional coordination, with a proven track record managing BOMs and supplier relations and ensuring seamless collaboration across engineering teams — bridging design concepts and production teams.',
+    tags: ['3D CAD Modelling', 'Structural Analysis', 'BOM & Supplier Management'],
+  },
+  {
+    id: 'shilpa',
+    name: 'Shilpa Prasad Malagavi',
+    role: 'Software & Integration Engineer',
+    education: 'B.E., Electrical, Electronics & Communications Engineering — Gogte Institute of Technology',
+    initials: 'SM',
+    bio: 'An expert in integration platforms, cloud architectures and application lifecycle management, with prior experience at IBM and Mindtree. She holds multiple advanced credentials, including AWS Certified Developer – Associate and IBM Certified Application Developer, with hands-on expertise in containerised applications, enterprise application integration and business process management (BPM). Her toolkit spans design thinking, SDLC management, AppDynamics and RESTful web services.',
+    tags: ['Cloud & Integration', 'AWS Certified Developer', 'Application Lifecycle Management'],
+  },
+];
