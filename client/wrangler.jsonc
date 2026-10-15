@@ -23,7 +23,7 @@
   // Express host. For production prefer a Secret:  npx wrangler secret put API_ORIGIN
   "vars": {
 
-  "SHEET_WEBHOOK_URL": "https://script.google.com/macros/s/AKfycbylY7Y9d4K39OKPXJuIfQg4-japzNh3-J1CiMpu9-B278hofhF-i7XjDgSo0kOaZBj8kQ/exec"
+  "SHEET_WEBHOOK_URL": "https://script.google.com/macros/s/AKfycbwkGE6ku0QCIzmoC5vFKK3h88j2SWlrDxqrouXI_CSda7elp4yJvotz74MSoyX7YMNP/exec"
 
   }
 }
