@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { SITE, whatsappLink } from '../config/site.js';
@@ -40,6 +40,8 @@ export default function EnquiryForm() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
   const [serverMsg, setServerMsg] = useState('');
+  const [prodOpen, setProdOpen] = useState(false);
+  const prodRef = useRef(null);
 
   // Pre-fill product when arriving from an "Enquire Now" button
   useEffect(() => {
@@ -47,7 +49,18 @@ export default function EnquiryForm() {
     if (product) setValues((v) => ({ ...v, productOrService: product }));
   }, [search]);
 
+  // Close the product dropdown when clicking outside it
+  useEffect(() => {
+    function onDoc(e) {
+      if (prodRef.current && !prodRef.current.contains(e.target)) setProdOpen(false);
+    }
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, []);
+
   const options = [...PRODUCTS.map((p) => p.name), ...SERVICES.map((s) => s.title)];
+  const q = (values.productOrService || '').toLowerCase().trim();
+  const prodMatches = (q ? options.filter((o) => o.toLowerCase().includes(q)) : options).slice(0, 8);
 
   const set = (k) => (e) => {
     setValues((v) => ({ ...v, [k]: e.target.value }));
@@ -95,15 +108,21 @@ export default function EnquiryForm() {
     window.open(whatsappLink(whatsappMessage(values)), '_blank', 'noopener');
   }
 
+  const selectProduct = (name) => {
+    setValues((v) => ({ ...v, productOrService: name }));
+    setErrors((er) => ({ ...er, productOrService: undefined }));
+    setProdOpen(false);
+  };
+
   const field = (id, label, props = {}, required = true) => (
     <div className={`field ${errors[id] ? 'has-error' : ''} ${props.wide ? 'field--wide' : ''}`}>
       <label htmlFor={`f-${id}`}>{label}{required && <span aria-hidden="true"> *</span>}</label>
       {props.textarea ? (
-        <textarea id={`f-${id}`} rows="5" value={values[id]} onChange={set(id)} required={required}
+        <textarea id={`f-${id}`} rows="5" value={values[id]} onChange={set(id)}
           aria-invalid={!!errors[id]} aria-describedby={errors[id] ? `e-${id}` : undefined} />
       ) : (
-        <input id={`f-${id}`} type={props.type || 'text'} value={values[id]} onChange={set(id)} required={required}
-          autoComplete={props.autoComplete} inputMode={props.inputMode} list={props.list} placeholder={props.placeholder}
+        <input id={`f-${id}`} type={props.type || 'text'} value={values[id]} onChange={set(id)}
+          autoComplete={props.autoComplete} inputMode={props.inputMode} placeholder={props.placeholder}
           aria-invalid={!!errors[id]} aria-describedby={errors[id] ? `e-${id}` : undefined} />
       )}
       {errors[id] && <p className="field__error" id={`e-${id}`} role="alert">{errors[id]}</p>}
@@ -112,11 +131,6 @@ export default function EnquiryForm() {
 
   return (
     <form className="enquiry" onSubmit={onSubmit} noValidate>
-      {status === 'success' && (
-        <div className="notice notice--ok" role="status">
-          <strong>Thank you. Your enquiry has been received.</strong> Our team will contact you on the phone number or email you provided.
-        </div>
-      )}
       {status === 'error' && (
         <div className="notice notice--error" role="alert">
           <strong>{serverMsg}</strong> You can send the same details on WhatsApp or call {SITE.phoneDisplay}.
@@ -128,8 +142,40 @@ export default function EnquiryForm() {
         {field('organisation', 'Company / Institution Name', { autoComplete: 'organization' }, false)}
         {field('phone', 'Phone Number', { type: 'tel', autoComplete: 'tel', inputMode: 'tel', placeholder: 'e.g. 8951272366' })}
         {field('email', 'Email Address', { type: 'email', autoComplete: 'email' })}
-        {field('productOrService', 'Product or Service Required', { list: 'product-options', placeholder: 'Choose from the list or type your own' })}
-        <datalist id="product-options">{options.map((o) => <option key={o} value={o} />)}</datalist>
+
+        {/* Product / service — custom React combobox (no browser datalist) */}
+        <div className={`field ${errors.productOrService ? 'has-error' : ''}`} ref={prodRef}>
+          <label htmlFor="f-productOrService">Product or Service Required<span aria-hidden="true"> *</span></label>
+          <div className="combo">
+            <input
+              id="f-productOrService"
+              type="text"
+              role="combobox"
+              aria-expanded={prodOpen}
+              aria-controls="prod-listbox"
+              aria-autocomplete="list"
+              autoComplete="off"
+              value={values.productOrService}
+              placeholder="Choose from the list or type your own"
+              onChange={(e) => { setValues((v) => ({ ...v, productOrService: e.target.value })); setProdOpen(true); if (errors.productOrService) setErrors((er) => ({ ...er, productOrService: undefined })); }}
+              onFocus={() => setProdOpen(true)}
+              aria-invalid={!!errors.productOrService}
+              aria-describedby={errors.productOrService ? 'e-productOrService' : undefined}
+            />
+            {prodOpen && prodMatches.length > 0 && (
+              <ul className="combo__list" id="prod-listbox" role="listbox">
+                {prodMatches.map((o) => (
+                  <li key={o} role="option" aria-selected={values.productOrService === o}
+                    onMouseDown={(e) => { e.preventDefault(); selectProduct(o); }}>
+                    {o}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {errors.productOrService && <p className="field__error" id="e-productOrService" role="alert">{errors.productOrService}</p>}
+        </div>
+
         {field('quantity', 'Quantity (if known)', {}, false)}
         {field('location', 'Location', { autoComplete: 'address-level2' }, false)}
         {field('requirements', 'Project Requirements', { textarea: true, wide: true })}
@@ -147,6 +193,18 @@ export default function EnquiryForm() {
         </button>
       </div>
       <p className="enquiry__note">Fields marked * are required. Submitted enquiries are stored securely so our team can reply.</p>
+
+      {/* Thank-you popup on successful submit */}
+      {status === 'success' && (
+        <div className="modal" role="dialog" aria-modal="true" aria-labelledby="ty-title" onClick={() => setStatus('idle')}>
+          <div className="modal__card" onClick={(e) => e.stopPropagation()}>
+            <span className="modal__icon" aria-hidden="true"><Icon name="check" size={30} /></span>
+            <h3 id="ty-title">Thank you!</h3>
+            <p>Your enquiry has been received. Our team will contact you on the phone number or email you provided.</p>
+            <button type="button" className="btn btn--primary btn--lg" onClick={() => setStatus('idle')}>Close</button>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
