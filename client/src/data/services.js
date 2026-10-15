@@ -77,7 +77,7 @@ export const TEAM = [
   },
   {
     id: 'praful',
-    name: 'Praful Malagavi',
+    name: 'Ing. Praful Malagavi',
     role: 'Mechanical Design Engineer',
     education: 'M.S., Machine and Equipment Design',
     initials: 'PM',
