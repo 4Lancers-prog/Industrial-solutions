@@ -45,6 +45,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* Navbar */
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); font-size: 1.1rem; line-height: 1.1; }
+.logo__img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; display: block; flex: 0 0 auto; }
+.section__cta { text-align: center; margin-top: 36px; }
 .logo strong { font-weight: 800; }
 .logo__text { font-weight: 500; }
 .logo--light { color: #fff; }

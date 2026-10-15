@@ -58,6 +58,15 @@ export const INDUSTRIES = [
 
 export const TEAM = [
   {
+    id: 'vijaykumar',
+    name: 'Vijaykumar Malagavi',
+    role: 'Founder & Senior Industrial Engineering Consultant',
+    education: '32+ years of international corporate experience',
+    initials: 'VM',
+    bio: 'Senior Industrial Engineering Consultant with 32+ years of international corporate experience in turnkey project commissioning, preventive-maintenance systems and manufacturing optimisation. He specialises in diagnosing operational bottlenecks, implementing cost-saving PRISM metrics and managing large-scale facility transitions. Through Industrial Solutions he also serves as the primary technical advisor to industrial workshops and vocational institutions — delivering syllabus-aligned tool design, machinery servicing and expert procurement auditing.',
+    tags: ['Turnkey Commissioning', 'Preventive Maintenance', 'Manufacturing Optimisation'],
+  },
+  {
     id: 'prasad',
     name: 'Prasad Malagavi',
     role: 'Sales & Business Development (B2B / B2G)',

@@ -39,7 +39,7 @@ export default function AboutPage() {
             <p className="about__quote">One partner. Complete solutions. Lasting value.</p>
             <h3>What we supply</h3>
             <ul className="about__list">
-              {CATEGORIES.map((c) => (<li key={c.id}><Icon name="check" size={18} /><Link to={`/#cat-${c.id}`}>{c.name}</Link></li>))}
+              {CATEGORIES.map((c) => (<li key={c.id}><Icon name="check" size={18} /><Link to={`/products#cat-${c.id}`}>{c.name}</Link></li>))}
             </ul>
           </div>
           <div className="about__side">
@@ -84,7 +84,7 @@ export default function AboutPage() {
                     <p className="team__role">{m.role}</p>
                   </div>
                 </div>
-                <p className="team__edu"><Icon name="book" size={14} /> {m.education}</p>
+                {m.education && <p className="team__edu"><Icon name="book" size={14} /> {m.education}</p>}
                 <p className="team__bio">{m.bio}</p>
                 <ul className="team__tags">
                   {m.tags.map((t) => (<li key={t}>{t}</li>))}

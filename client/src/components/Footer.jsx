@@ -17,8 +17,8 @@ export default function Footer() {
           <h3>Quick Links</h3>
           <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/products">Products</Link></li>
             <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/#equipment">Equipment</Link></li>
             <li><Link to="/about#services">Services</Link></li>
             <li><Link to="/#enquiry">Contact &amp; Enquiry</Link></li>
           </ul>
@@ -26,7 +26,7 @@ export default function Footer() {
         <div>
           <h3>Product Categories</h3>
           <ul>
-            {CATEGORIES.map((c) => (<li key={c.id}><Link to={`/#cat-${c.id}`}>{c.name}</Link></li>))}
+            {CATEGORIES.map((c) => (<li key={c.id}><Link to={`/products#cat-${c.id}`}>{c.name}</Link></li>))}
           </ul>
         </div>
         <div>

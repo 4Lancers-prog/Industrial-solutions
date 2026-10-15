@@ -33,7 +33,8 @@ export function enquiryLink(name) {
 
 export const NAV_LINKS = [
   { label: 'Home', to: '/' },
+  { label: 'Products', to: '/products' },
   { label: 'About Us', to: '/about' },
   { label: 'Services', to: '/about#services' },
-  { label: 'Works', to: '/#works' },
+  { label: 'Works', to: '/products#works' },
 ];

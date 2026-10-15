@@ -4,6 +4,7 @@ import Footer from './components/Footer.jsx';
 import ScrollManager from './components/ScrollManager.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
 import HomePage from './pages/HomePage.jsx';
+import ProductsPage from './pages/ProductsPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 
@@ -17,6 +18,7 @@ export default function App() {
       <main id="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

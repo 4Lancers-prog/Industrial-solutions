@@ -175,5 +175,6 @@ export const GALLERY = [
   { src: IMG + 'gallery-hydraulic-station.webp', alt: 'Hydraulic trainer board on a trainer station', caption: 'Hydraulic trainer station' },
   { src: IMG + 'gallery-pneumatic-station.webp', alt: 'Pneumatic trainer board with relay and pushbutton station', caption: 'Pneumatic trainer station' },
   { src: IMG + 'gallery-motor-generator-panel.webp', alt: 'Control panel of a motor generator set with DC starter', caption: 'Motor-generator set control panel' },
-  { src: IMG + 'electrical-machine-trainer-power-supply.webp', alt: 'Electrical machine trainer with power supply', caption: 'Electrical machine trainer with power supply' },
+  { src: IMG + 'installed-generator-panels.webp', alt: 'Row of generator and motor-generator control panels installed at a customer laboratory', caption: 'Generator panels installed on site' },
+  { src: IMG + 'installed-hydraulic-pneumatic-kits.webp', alt: 'Hydraulic and pneumatic trainer kits with cut-section component cabinets in a laboratory', caption: 'Hydraulic & pneumatic trainer kits in a lab' },
 ];
