@@ -147,6 +147,17 @@ export const PRODUCTS = [
     applications: ['ITI and vocational electrician training'],
   },
   {
+    id: 'iti-tools-supplier',
+    category: 'engineering-lab',
+    name: 'ITI Tools & Lab Equipment Supply',
+    image: IMG + 'poster-iti-tools-supplier.webp',
+    alt: 'Industrial Solutions ITI tools supplier poster showing electrician, fitter, electronics, welding, machinist and automobile lab equipment',
+    poster: true,
+    overview: 'Complete supply for ITI labs — electrician, fitter, electronics, welding, machinist and automobile labs — covering hand tools, measuring instruments, electrical components, motors and pumps, and pneumatic, hydraulic and solar training kits.',
+    components: ['Hand tools', 'Measuring instruments', 'Electrical components', 'Motors & pumps', 'Pneumatic & hydraulic trainer kits', 'Solar training kit'],
+    applications: ['Complete ITI lab setup across trades'],
+  },
+  {
     id: 'fitter-lab',
     category: 'engineering-lab',
     name: 'Fitter Lab Setup',
