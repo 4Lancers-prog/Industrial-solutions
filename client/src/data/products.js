@@ -26,6 +26,16 @@ export const PRODUCTS = [
     applications: ['Engineering college and polytechnic hydraulics labs', 'ITI and vocational training workshops'],
   },
   {
+    id: 'hydraulic-trainer-premium',
+    category: 'hydraulic',
+    name: 'Hydraulic Trainer Kit — Premium Model',
+    image: IMG + 'hydraulic-trainer-premium.webp',
+    alt: 'Premium hydraulic trainer system on a castor-wheeled worktop bench with a full board of directional, flow and pressure valves, a hose set and a separate hydraulic power pack cabinet',
+    overview: 'Premium hydraulic trainer on a castor-wheeled worktop bench, with a full board of directional, flow and pressure-control valves, a complete hose set and a separate hydraulic power-pack unit for a wide range of circuit experiments.',
+    components: ['Directional control valves', 'Flow and pressure control valves', 'Double-acting cylinders', 'Pressure gauge', 'Hose set with quick couplers', 'Hydraulic power pack', 'Castor-wheeled worktop bench'],
+    applications: ['Engineering college and polytechnic hydraulics labs'],
+  },
+  {
     id: 'hydraulic-cut-section-models',
     category: 'hydraulic',
     name: 'Cut-Section Models of Hydraulic Components',
@@ -44,6 +54,17 @@ export const PRODUCTS = [
     overview: 'A complete pneumatic training board with labelled valves, cylinders and an FRL unit, plus a relay and pushbutton station for electro-pneumatic practice.',
     components: ['FRL unit with pressure gauge', '5/2-way manual switch and solenoid valves', '3/2-way manual, roller lever and pneumatic valves', 'Single and double acting cylinders', 'Shuttle valve and two-pressure valve', 'Flow control valves', 'Relay & pushbutton station'],
     applications: ['Pneumatics and electro-pneumatics practicals', 'ITI and technical institute workshops'],
+  },
+  {
+    id: 'pneumatic-trainer-premium',
+    category: 'pneumatic',
+    name: 'Pneumatic Trainer Kit — Premium Model',
+    image: IMG + 'pneumatic-trainer-premium.webp',
+    alt: 'Premium pneumatic trainer bench with a board of valves and cylinders, a built-in air compressor under the worktop and a separate drawered tool storage cabinet',
+    poster: true,
+    overview: 'Premium pneumatic trainer on a worktop bench with a board of valves and cylinders, a built-in air compressor housed under the worktop, and a separate drawered tool-storage cabinet.',
+    components: ['FRL unit and manifold', 'Directional and solenoid valves', 'Single and double acting cylinders', 'Built-in air compressor', 'Tool storage cabinet', 'Worktop bench'],
+    applications: ['Pneumatics and electro-pneumatics practicals'],
   },
   {
     id: 'pneumatic-trainer-station',
@@ -103,7 +124,7 @@ export const PRODUCTS = [
     alt: 'Blue control panel of motor generator set DC to AC with ammeter, voltmeter, DC starter and MCB',
     overview: 'Wall-mounted panel with ammeter, voltmeter, indicator, DC starter and MCB for a DC-to-AC motor-generator set.',
     components: ['Ammeter and voltmeter', 'DC starter', 'Indicator lamp', 'MCB', 'Terminal connections'],
-    applications: ['Electrical machines laboratories'],
+    applications: ['Motor-generator set (DC to AC) experiments'],
   },
   {
     id: 'cp-machine-trainer',
@@ -113,7 +134,7 @@ export const PRODUCTS = [
     alt: 'Control panel of electrical machine trainer with power supply showing meters, variable DC dimmer and MCBs',
     overview: 'Control panel with six meters, variable DC dimmer, indicators, MCBs and labelled input and output terminals.',
     components: ['Ammeters and voltmeters', 'Variable DC dimmer', 'Indicator lamps', 'MCBs', '440 V input and output terminals'],
-    applications: ['Electrical machines laboratories'],
+    applications: ['Electrical machine trainer experiments (motors, generators, transformers)'],
   },
   {
     id: 'cp-shunt-compound',
@@ -172,8 +193,8 @@ export const PRODUCTS = [
 
 // Featured categories for the homepage (images are the client's photos)
 export const FEATURED = [
-  { id: 'hydraulic', name: 'Hydraulic Training Systems', image: IMG + 'hydraulic-pneumatic-trainer-lab.webp', alt: 'Hydraulic and pneumatic trainer stations with cut-section panels', desc: 'Panel-mounted trainers and cut-section models for hands-on hydraulic circuit learning.', product: 'Hydraulic Trainer Kit' },
-  { id: 'pneumatic', name: 'Pneumatic Training Kits', image: IMG + 'pneumatic-trainer-kit-relay-station.webp', alt: 'Pneumatic trainer kit with relay and pushbutton station', desc: 'Labelled valves, cylinders and an FRL unit, with a relay and pushbutton station for electro-pneumatics.', product: 'Pneumatic Trainer Kit' },
+  { id: 'hydraulic', name: 'Hydraulic Training Systems', image: IMG + 'hydraulic-pneumatic-trainer-lab.webp', alt: 'Hydraulic and pneumatic trainer stations with cut-section panels', desc: 'Panel-mounted trainers and cut-section models for hands-on hydraulic circuit learning. Available in Basic and Premium models.', product: 'Hydraulic Trainer Kit' },
+  { id: 'pneumatic', name: 'Pneumatic Training Kits', image: IMG + 'pneumatic-trainer-kit-relay-station.webp', alt: 'Pneumatic trainer kit with relay and pushbutton station', desc: 'Labelled valves, cylinders and an FRL unit, with a relay and pushbutton station for electro-pneumatics. Available in Basic and Premium models.', product: 'Pneumatic Trainer Kit' },
   { id: 'electrical-machines', name: 'Electrical Machines & Motor-Generator Sets', image: IMG + 'motor-generator-set-dc-to-ac-lab.webp', alt: 'Motor generator set with control panel in a laboratory', desc: 'Coupled motor and generator machines on common bases, ready for machine laboratories.', product: 'Motor-Generator Set' },
   { id: 'control-panels', name: 'Electrical Control Panels', image: IMG + 'control-panel-electrical-machine-trainer.webp', alt: 'Control panel with meters and MCBs', desc: 'Wall-mounted panels with meters, starters, MCBs and labelled terminals.', product: 'Electrical Control Panel' },
   { id: 'components', name: 'Hydraulic & Pneumatic Components', image: IMG + 'hydraulic-pneumatic-components-cut-section.webp', alt: 'Cut-section models of hydraulic and pneumatic components', desc: 'Valves, cylinders, gauges and cut-section models for demonstration and practice.', product: 'Hydraulic and Pneumatic Components', anchor: 'hydraulic' },
