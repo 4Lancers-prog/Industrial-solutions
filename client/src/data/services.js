@@ -56,6 +56,13 @@ export const INDUSTRIES = [
   { icon: 'clipboard', title: 'Industrial Maintenance and Engineering', text: 'Equipment and support for maintenance teams.' },
 ];
 
+export const TURNKEY = [
+  { icon: 'wrench', title: 'Work & Excavation', text: 'Site preparation, grading, foundations and civil works.' },
+  { icon: 'gear', title: 'Installation', text: 'Machinery placement, plant layout and structural assembly.' },
+  { icon: 'clipboard', title: 'Commissioning', text: 'System testing, start-up protocols and performance verification.' },
+  { icon: 'shield', title: 'Compliance', text: 'Regulatory approvals, quality standards, safety regulations and certifications.' },
+];
+
 export const TEAM = [
   {
     id: 'vijaykumar',
