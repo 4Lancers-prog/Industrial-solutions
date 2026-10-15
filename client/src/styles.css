@@ -47,6 +47,19 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); font-size: 1.1rem; line-height: 1.1; }
 .logo__img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; display: block; flex: 0 0 auto; }
 .section__cta { text-align: center; margin-top: 36px; }
+
+/* Turnkey / Detailed Project Reports — premium step cards */
+.turnkey-section { background: linear-gradient(180deg, #e9f1ff 0%, #ffffff 72%); }
+.turnkey__card { position: relative; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 30px 22px 26px; text-align: center; box-shadow: 0 10px 30px rgba(11,31,51,.06); transition: transform .3s, box-shadow .3s, border-color .3s; }
+.turnkey__card:hover { transform: translateY(-6px); border-color: var(--teal); box-shadow: 0 22px 46px rgba(21,94,239,.16); }
+.turnkey__num { position: absolute; top: 8px; right: 16px; font: 800 2.4rem/1 var(--font-head); color: #eef3fb; letter-spacing: -.02em; pointer-events: none; }
+.turnkey__icon { position: relative; display: inline-grid; place-items: center; width: 66px; height: 66px; border-radius: 18px; margin-bottom: 16px; color: #fff; background: linear-gradient(135deg, var(--navy), var(--blue)); box-shadow: 0 12px 24px rgba(21,94,239,.32); }
+.turnkey__card h3 { position: relative; margin: 0 0 8px; font-size: 1.08rem; color: var(--navy); }
+.turnkey__card p { position: relative; margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.55; }
+/* dashed connector in the gap between steps (desktop) */
+@media (min-width: 900px) {
+  .grid--4.turnkey > .turnkey__card + .turnkey__card::before { content: ''; position: absolute; top: 56px; left: -26px; width: 28px; height: 0; border-top: 2px dashed #a9c3f0; }
+}
 .logo strong { font-weight: 800; }
 .logo__text { font-weight: 500; }
 .logo--light { color: #fff; }
