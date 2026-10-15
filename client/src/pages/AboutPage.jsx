@@ -10,7 +10,7 @@ import CTABand from '../components/CTABand.jsx';
 import Icon from '../components/Icon.jsx';
 import useReveal from '../hooks/useReveal.js';
 import { SITE, whatsappLink } from '../config/site.js';
-import { SERVICES, WHY, INDUSTRIES, TEAM } from '../data/services.js';
+import { SERVICES, WHY, INDUSTRIES, TEAM, TURNKEY } from '../data/services.js';
 import { CATEGORIES } from '../data/products.js';
 
 export default function AboutPage() {
@@ -64,6 +64,22 @@ export default function AboutPage() {
                 <p className="ncard__meta"><strong>Includes:</strong> {s.includes}</p>
                 <p className="ncard__meta"><strong>Suits:</strong> {s.who}</p>
               </NumberCard>
+            ))}
+          </RevealGrid>
+        </div>
+      </section>
+
+      <section id="turnkey" className="section turnkey-section">
+        <div className="container">
+          <SectionHeading title="Tailor-Made & Turnkey Detailed Project Reports" intro="To establish a Food, Pharma or any industry — planned and delivered from the ground up." />
+          <RevealGrid className="grid grid--4 turnkey">
+            {TURNKEY.map((t, i) => (
+              <article key={t.title} className="turnkey__card">
+                <span className="turnkey__num" aria-hidden="true">{`0${i + 1}`}</span>
+                <span className="turnkey__icon" aria-hidden="true"><Icon name={t.icon} size={28} /></span>
+                <h3>{t.title}</h3>
+                <p>{t.text}</p>
+              </article>
             ))}
           </RevealGrid>
         </div>
