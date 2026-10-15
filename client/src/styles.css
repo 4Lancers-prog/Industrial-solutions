@@ -291,6 +291,21 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .enquiry__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .enquiry__note { margin: 14px 0 0; font-size: .85rem; color: var(--muted); }
+
+/* Product combobox (React dropdown) */
+.combo { position: relative; }
+.combo__list { position: absolute; z-index: 20; top: calc(100% + 4px); left: 0; right: 0; margin: 0; padding: 4px; list-style: none; max-height: 240px; overflow-y: auto; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.combo__list li { padding: 9px 12px; border-radius: 4px; cursor: pointer; font-size: .95rem; color: var(--text); }
+.combo__list li:hover, .combo__list li[aria-selected="true"] { background: var(--grey); color: var(--navy); }
+
+/* Thank-you popup */
+.modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(11,31,51,.55); backdrop-filter: blur(2px); animation: modal-fade .2s ease; }
+.modal__card { background: #fff; border-radius: 14px; max-width: 420px; width: 100%; padding: 34px 30px 30px; text-align: center; box-shadow: 0 24px 60px rgba(11,31,51,.3); animation: modal-pop .25s ease; }
+.modal__icon { display: grid; place-items: center; width: 60px; height: 60px; margin: 0 auto 16px; border-radius: 50%; color: #fff; background: linear-gradient(135deg, var(--teal), var(--blue)); }
+.modal__card h3 { margin: 0 0 8px; font-size: 1.4rem; color: var(--navy); }
+.modal__card p { margin: 0 0 22px; color: var(--muted); }
+@keyframes modal-fade { from { opacity: 0; } }
+@keyframes modal-pop { from { opacity: 0; transform: translateY(10px) scale(.97); } }
 .notice { padding: 14px 16px; border-radius: var(--radius); margin-bottom: 20px; font-size: .95rem; }
 .notice--ok { background: #e4f6ee; border: 1px solid #8fd1b0; color: #0b5132; }
 .notice--error { background: #fdecec; border: 1px solid #efa5a8; color: #7a1419; }
